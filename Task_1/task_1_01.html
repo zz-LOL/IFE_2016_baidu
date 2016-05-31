@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task1</title>
+<script type="text/javascript">
+    window.onload = function(){
+
+        var html = "";
+        for(var i=0; i<4; i++){
+            html+= '&nbsp;&nbsp;<p>&nbsp;&nbsp;    好看的图片</p>&nbsp;&nbsp;<img src= "images/task_1_01.png" /><br/>';
+        }
+       document.getElementById("div").innerHTML=html;
+}
+</script>
+
+</head>
+<body>
+<h1>网站1级标题</h1>
+
+<ul>
+    <li><a href="javascript:void(0);">导航栏链接1</a></li>
+    <li><a href="javascript:void(0);">导航栏链接2</a></li>
+    <li><a href="javascript:void(0);">导航栏链接3</a></li>
+    <li><a href="javascript:void(0);">导航栏链接4</a></li>
+</ul>
+
+<h2>文章一级标题</h2>
+<h2>文章二级标题</h2>
+
+<p>文章作者 文章发表时间</p>
+<p>这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，</p>
+<p>这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，<a href="http://ife.baidu.com">这里有一个链接链接到ife.baidu.com</a>这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，</p>
+
+<img src="images/task_1_01.png">
+
+<p>这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，</p>
+<p>这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，<a href="http://ife.baidu.com">这里有一个链接链接到ife.baidu.com</a>这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，</p>
+
+<div id="div"></div>
+
+<p>文章作者&nbsp;文章发表时间</p>
+<ol>
+    <li>排名1</li>
+    <li>排名2</li>
+    <li>排名3</li>
+</ol>
+
+<p>下面是一个表格，给表格加了一个border="1"好让你看出是一个表格</p>
+<table border="1">
+    <tr>
+        <td>表头</td>
+        <td>表头</td>
+        <td>表头</td>
+    </tr>
+    <tr>
+        <td>表内容单元格</td>
+        <td>表内容单元格</td>
+        <td>操作</td>
+    </tr>
+    <tr>
+        <td>表内容单元格</td>
+        <td>表内容单元格</td>
+        <td>操作</td>
+    </tr>
+    <tr>
+        <td>表内容单元格</td>
+        <td>表内容单元格</td>
+        <td>操作</td>
+    </tr>
+    <tr>
+        <td>表内容单元格</td>
+        <td>表内容单元格</td>
+        <td>操作</td>
+    </tr>
+    <tr>
+        <td>总计</td>
+        <td colspan="2">10000</td>
+    </tr>
+</table>
+
+<h2>侧栏注册窗口标题</h2>
+<form>
+    请输入邮箱地址:
+    <input type="text" name="email" value="这是一个文本输入框">
+    <p>邮箱地址请按要求格式输入</p>
+    请输入密码:
+    <input type="text" name="pwd" value="这是一个文本输入框">
+    请重复输入密码:
+    <input type="text" name="pwd" value="这是一个文本输入框">
+    <p>密码请为6-16位英文数字</p>
+</form><br/>
+
+<form>
+    性别:
+    <input type="radio" name="sex" value="man">男
+    <input type="radio" name="sex" value="woman">女
+    城市:
+    <select name="city">
+        <option value="BJ">北京</option>
+        <option value="AN">安徽</option>
+        <option value="NJ">南京</option>
+    </select>
+
+    <input type="checkbox" name="city" />城市
+    <input type="checkbox" name="yishu" />艺术
+
+    个人描述:
+    <textarea type="text" name="miaoshu" style="height:50px;" >这是一个多行描述输入框，输入您的个人描述</textarea>
+    <input type="submit" value="确认提交" />
+
+    </form>
+</form>
+</body>
+</html>

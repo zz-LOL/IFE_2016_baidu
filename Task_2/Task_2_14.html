@@ -39,7 +39,7 @@
                                .sort(function(d1, d2){
                                    return d2[1] - d1[1];
                                });
-
+        /*这里的名次应该用中文的，我占时没有想到好的办法，所以就先拿数字代替*/
         for(var i=0; i<soutData.length; i++){
             content += "<li>第" + (i + 1) + "名，" + soutData[i][0] + "，" + soutData[i][1];
         }

@@ -1,0 +1,16 @@
+body,ul,h1,h2,h3,h4,h5,h6,form,dl,p{margin: 0;padding: 0;font-family: "微软雅黑";}
+
+/*头部导航栏*/
+.nav{position: fixed;top: 0;height:80px;width:100%;background-color: #000;opacity: 0.8;z-index:3;}
+.nav-contain{position: relative;height: 100%;width: 1200px;margin:0 auto;}
+.nav-logo{float: left;margin-left: 0;margin-top: 20px;}
+.nav-contain ul{float: right;height: 100%;overflow: hidden;}
+.nav-contain ul li{float: left;font-size: 16px;margin-left: 25px;margin-top: 30px;list-style: none;color: #fff;}
+.nav-contain ul li a{text-decoration: none;color: #fff;}
+.nav-contain ul li span{margin-top: -5px;padding-top: 8px;display:block;width: 70px;height:23px;text-align: center;font-size: 12px;background-color: #ffb336;}
+.nav-img{margin-left: -10px;margin-top: 5px;}
+.nav-contain ul li:nth-child(1)>a{color: #00a8ea ;}
+
+
+/*上部banner图*/
+.banner{position: relative;overflow: hidden;}

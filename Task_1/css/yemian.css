@@ -1,4 +1,4 @@
-body,ul,h1,h2,h3,h4,h5,h6,form,dl,p{margin: 0;padding: 0;font-family: "微软雅黑";}
+body,ul,h1,h2,h3,h4,h5,h6,form,dl,p,li,dt,dd{margin: 0;padding: 0;font-family: "微软雅黑";}
 
 
 /*头部导航栏*/
@@ -52,5 +52,48 @@ body,ul,h1,h2,h3,h4,h5,h6,form,dl,p{margin: 0;padding: 0;font-family: "微软雅
 .weinin span{position: absolute;width: 100%;text-align: center;margin-top:160px;height: 30px;}
 .weinin span a:nth-child(2){margin-left: 50px;}
 .weinin span a{width: 84px;height: 28px;font-size:14px;color: #00A8EA;border:1px solid #00A8EA;border-radius: 5px;display: inline-block;text-align: center;line-height: 28px;}
-.weinin span a:hover{color:#ffff00;border-color: #ffff00;cursor: pointer;}
+.weinin span a:hover{color:#ffb336;border-color: #ffb336;cursor: pointer;}
 .weinin p{positin: absolute;width: 80%;margin-left: 10%;text-align: center;display: block;margin-top: 230px;}
+
+/*新IT*/
+.it{position: relative;width: 100%;height: 400px;background:url(../images/it-bg.png);}
+.it-zhezhao{position: absolute;width: 100%;height: 100%;background-color: #000;opacity: 0.8;top: 0;left: 0;}
+.it-zhihu{float: left;width: 25%;height: 100%;background-color: #00A8EA;margin-left: 10%;top:0;opacity: 0.8;display: block;overflow: hidden; }
+.it-up{width:100%;height:100%;z-index: 3;}
+.it-zhihu h1{margin:40px 0 25px 0;color: #fff;display: block;text-align: center;width: 100%;}
+.it-shuzi{font-size: 38px;font-weight: bold;color: #ffb336;width: 100%;text-align: center;display: block;}
+.it-zhihu h5{width: 100%;color: #fff;text-align: center;font-size: 14px;}
+.it-zhihu h4{margin-top: 10px;width: 100%;font-size: 16px;color: #fff;text-align: center;}
+.it-jieshao{margin-top: 15px;margin-left: 5%;margin-right: 5%;font-size: 14px;color: #fff;text-align: center;display: block;}
+.it-logo{margin:20px auto 0 auto;width: 40px;height: 40px;background:url(../images/lj-jt.png);}
+.it-logo:hover{cursor: pointer;}
+.it-you{float: right;margin-right: 10%;width: 48%;height: 100%;}
+.it-you h1{margin-top: 40px;color: #00a8ea;}
+.it-you span{display: block;color: #fff;margin-top: 60px;line-height: 28px;font-size: 14px;}
+.it-you a{text-decoration: none;border:1px solid #ffb336;color: #ffb336;border-radius: 5px;width: 84px;height: 28px;font-size: 12px;text-align: center;margin-top: 15px;display: block;line-height: 28px; }
+
+/*地图背景的*/
+.ditu{position: relative;background:url(../images/map-bg.png);width: 100%;height: 368px;overflow: hidden;}
+.city-bg{width: 1200px;margin: auto;height: 100%;display: block;top:0;}
+.city{position: absolute;margin-top: 150px;border-bottom:2px solid #00a8ea;width: 600px;height: 72px;background-color: #fff;}
+.city ul{margin:auto;width:470px;line-height: 72px;}
+.city li{float: left;margin-left: 20px;list-style: none;}
+.city li a{text-decoration: none;color: #000;}
+.city-left{float:right;margin-top: 100px;width: 520px;height: 150px;background-color: #fff;border-bottom:2px solid #00a8ea;}
+.city-left ul{margin-left: 40px;margin-top: 20px;}
+.city-left ul li{list-style: none;line-height: 35px;}
+.city-left ul li span{color: #00a8ea;}
+
+/*底部导航*/
+.footer{position: relative;height: 300px;width: 100%;background-color: #333;}
+.footer-box{width: 1100px;margin: auto;height:100%;}
+.footer1{float: left;display: block;}
+.footer1 li{float: left;list-style: none;margin-top: 40px;}
+.footer1 dt{color: #fff;margin-bottom: 30px;}
+.footer1 dd{font-size: 14px;line-height: 25px;color: #999;}
+.shu{width: 1px;height: 170px;background-color: #6b6b6b;margin:0 20px 0 20px;}
+.footer2{float: right;display: block;padding-top:50px;}
+.footer2 img{float: left;margin-top: 30px;width: 105px;height: 85px;}
+.shu1{float: left;width:1px; height: 100px;background-color: #6b6b6b;margin:20px 20px 0 20px;}
+.footer2 ul{float: left;margin-top: 20px;  }
+.footer2 ul li{list-style: none;font-size: 14px;color: #6b6b6b;line-height: 25px;}

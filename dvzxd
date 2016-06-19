@@ -1,0 +1,134 @@
+[1mdiff --git a/.idea/workspace.xml b/.idea/workspace.xml[m
+[1mindex 42c5bda..4037a46 100644[m
+[1m--- a/.idea/workspace.xml[m
+[1m+++ b/.idea/workspace.xml[m
+[36m@@ -2,8 +2,11 @@[m
+ <project version="4">[m
+   <component name="ChangeListManager">[m
+     <list default="true" id="6ed4dacb-8334-48bb-b4de-ff98f976291a" name="Default" comment="">[m
+[31m-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Task_2/Task_2_13.html" />[m
+[32m+[m[32m      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Task_2/Task_2_16.html" />[m
+[32m+[m[32m      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Task_2/js/Task_2_16.js" />[m
+[32m+[m[32m      <change type="DELETED" beforePath="$PROJECT_DIR$/Task_2/better_Task_2_13.html" afterPath="" />[m
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />[m
+[32m+[m[32m      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Task_2/Task_2_14.html" afterPath="$PROJECT_DIR$/Task_2/Task_2_14.html" />[m
+     </list>[m
+     <ignored path="BaiduTask.iws" />[m
+     <ignored path=".idea/workspace.xml" />[m
+[36m@@ -24,11 +27,23 @@[m
+   </component>[m
+   <component name="FileEditorManager">[m
+     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">[m
+[31m-      <file leaf-file-name="Task_2_13.html" pinned="false" current-in-tab="true">[m
+[31m-        <entry file="file://$PROJECT_DIR$/Task_2/Task_2_13.html">[m
+[32m+[m[32m      <file leaf-file-name="Task_2_16.js" pinned="false" current-in-tab="false">[m
+[32m+[m[32m        <entry file="file://$PROJECT_DIR$/Task_2/js/Task_2_16.js">[m
+           <provider selected="true" editor-type-id="text-editor">[m
+[31m-            <state vertical-scroll-proportion="0.24050634">[m
+[31m-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />[m
+[32m+[m[32m            <state vertical-scroll-proportion="0.0">[m
+[32m+[m[32m              <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />[m
+[32m+[m[32m              <folding>[m
+[32m+[m[32m                <marker date="1465783063611" expanded="true" signature="729:764" placeholder="..." />[m
+[32m+[m[32m              </folding>[m
+[32m+[m[32m            </state>[m
+[32m+[m[32m          </provider>[m
+[32m+[m[32m        </entry>[m
+[32m+[m[32m      </file>[m
+[32m+[m[32m      <file leaf-file-name="Task_2_16.html" pinned="false" current-in-tab="true">[m
+[32m+[m[32m        <entry file="file://$PROJECT_DIR$/Task_2/Task_2_16.html">[m
+[32m+[m[32m          <provider selected="true" editor-type-id="text-editor">[m
+[32m+[m[32m            <state vertical-scroll-proportion="0.24525043">[m
+[32m+[m[32m              <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />[m
+               <folding />[m
+             </state>[m
+           </provider>[m
+[36m@@ -41,6 +56,7 @@[m
+       <list>[m
+         <option value="CSS File" />[m
+         <option value="HTML File" />[m
+[32m+[m[32m        <option value="JavaScript File" />[m
+       </list>[m
+     </option>[m
+   </component>[m
+[36m@@ -56,6 +72,12 @@[m
+         <option value="$PROJECT_DIR$/Task_1/css/task_1_02.css" />[m
+         <option value="$PROJECT_DIR$/Task2/Task_2_13.html" />[m
+         <option value="$PROJECT_DIR$/Task_2/Task_2_13.html" />[m
+[32m+[m[32m        <option value="$PROJECT_DIR$/Task_2/better_Task_2_13.html" />[m
+[32m+[m[32m        <option value="$PROJECT_DIR$/Task_2/Task_2_14.html" />[m
+[32m+[m[32m        <option value="$PROJECT_DIR$/Task_2/Task_2_13_better.html" />[m
+[32m+[m[32m        <option value="$PROJECT_DIR$/Task_2/Task_2_15.html" />[m
+[32m+[m[32m        <option value="$PROJECT_DIR$/Task_2/js/Task_2_16.js" />[m
+[32m+[m[32m        <option value="$PROJECT_DIR$/Task_2/Task_2_16.html" />[m
+       </list>[m
+     </option>[m
+   </component>[m
+[36m@@ -65,10 +87,10 @@[m
+     <detection-done>true</detection-done>[m
+   </component>[m
+   <component name="ProjectFrameBounds">[m
+[31m-    <option name="x" value="486" />[m
+[31m-    <option name="y" value="2" />[m
+[31m-    <option name="width" value="1050" />[m
+[31m-    <option name="height" value="741" />[m
+[32m+[m[32m    <option name="x" value="186" />[m
+[32m+[m[32m    <option name="y" value="-10" />[m
+[32m+[m[32m    <option name="width" value="1003" />[m
+[32m+[m[32m    <option name="height" value="767" />[m
+   </component>[m
+   <component name="ProjectLevelVcsManager" settingsEditedManually="false">[m
+     <OptionsSetting value="true" id="Add" />[m
+[36m@@ -95,6 +117,7 @@[m
+       <foldersAlwaysOnTop value="true" />[m
+     </navigator>[m
+     <panes>[m
+[32m+[m[32m      <pane id="Scope" />[m
+       <pane id="Scratches" />[m
+       <pane id="ProjectPane">[m
+         <subPane>[m
+[36m@@ -127,10 +150,31 @@[m
+               <option name="myItemId" value="BaiduTask" />[m
+               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />[m
+             </PATH_ELEMENT>[m
+[32m+[m[32m            <PATH_ELEMENT>[m
+[32m+[m[32m              <option name="myItemId" value="Task_2" />[m
+[32m+[m[32m              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />[m
+[32m+[m[32m            </PATH_ELEMENT>[m
+[32m+[m[32m            <PATH_ELEMENT>[m
+[32m+[m[32m              <option name="myItemId" value="js" />[m
+[32m+[m[32m              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />[m
+[32m+[m[32m            </PATH_ELEMENT>[m
+[32m+[m[32m          </PATH>[m
+[32m+[m[32m          <PATH>[m
+[32m+[m[32m            <PATH_ELEMENT>[m
+[32m+[m[32m              <option name="myItemId" value="BaiduTask" />[m
+[32m+[m[32m              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />[m
+[32m+[m[32m            </PATH_ELEMENT>[m
+[32m+[m[32m            <PATH_ELEMENT>[m
+[32m+[m[32m              <option name="myItemId" value="BaiduTask" />[m
+[32m+[m[32m              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />[m
+[32m+[m[32m            </PATH_ELEMENT>[m
+[32m+[m[32m            <PATH_ELEMENT>[m
+[32m+[m[32m              <option name="myItemId" value="Task_1" />[m
+[32m+[m[32m              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />[m
+[32m+[m[32m            </PATH_ELEMENT>[m
+           </PATH>[m
+         </subPane>[m
+       </pane>[m
+[31m-      <pane id="Scope" />[m
+     </panes>[m
+   </component>[m
+   <component name="PropertiesComponent">[m
+[36m@@ -220,25 +264,25 @@[m
+     </todo-panel>[m
+   </component>[m
+   <component name="ToolWindowManager">[m
+[31m-    <frame x="486" y="2" width="1050" height="741" extended-state="0" />[m
+[32m+[m[32m    <frame x="186" y="-10" width="1003" height="767" extended-state="0" />[m
+     <editor active="true" />[m
+     <layout>[m
+[31m-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20158103" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />[m
+[32m+[m[32m      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24352331" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />[m
+       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />[m
+       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" intern

@@ -2,9 +2,115 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>baidu_task_2_18</title>
+
+    <style text="text/css">
+        .content{width: 1200px;margin:0 auto;background-color: #eee;overflow: auto;}
+        .caozuo{width: 500px;margin:0 auto;}
+        .caozuo button{width: 20px;height: 20px;}
+        #xianshi div{margin-left: 20px;list-style: none;float: left;height: 20px;background-color: red;color: #fff;}
+        #xianshi{width: 1200px;margin:0 auto;overflow: auto;}
+    </style>
+
 </head>
 <body>
+    <div class="content">
+        <div class="caozuo">
+            <input id="text" type="text" />
+            <input id="left-in"type="button" value="左侧入" />
+            <input id="right-in" type="button" value="右侧入" />
+            <input id="left-out" type="button" value="左侧出" />
+            <input id="right-out" type="button" value="右侧出" />
+        </div>
 
+        <div id="xianshi">
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        /*取得列表数*/
+            var Data = [];
+
+        /*把数放在数组中*/
+
+
+        /*渲染列表*/
+            function xuanran(){
+                var datas = "";
+                for(var x in Data){
+                    datas += "<div>" + Data[x] + "</div>";
+                }
+                document.getElementById("xianshi").innerHTML = datas;
+            }
+
+        /*各种插入函数*/
+            function leftin(){
+                var leftinn = document.getElementById("text").value.trim();
+                if(!leftinn.match(/^\d+$/)){
+                    alert("请输入整数");
+                    return false;
+                }
+                Data.unshift(leftinn);
+                return Data;
+            }
+
+            function rightin(){
+                var rightinn = document.getElementById("text").value.trim();
+                if(!rightinn.match(/^\d+$/)){
+                    alert("请输入整数");
+                    return false;
+                }
+                Data.push(rightinn);
+                return Data;
+            }
+
+            function leftout(){
+                Data.shift();
+                return Data;
+            }
+
+            function rightout(){
+                Data.pop();
+                return Data;
+            }
+        /*按下按钮执行的函数*/
+            function leftindo(){
+                leftin();
+                xuanran();
+            }
+            function rightindo(){
+                rightin();
+                xuanran();
+            }
+
+            function leftoutdo(){
+                leftout();
+                xuanran();
+            }
+
+            function rightoutdo(){
+                rightout();
+                xuanran();
+            }
+        /*监听按钮下按动作*/
+            function init(){
+                document.getElementById("left-in").addEventListener("click", function(){
+                    leftindo();
+                });
+                document.getElementById("right-in").addEventListener("click", function(){
+                    rightindo();
+                });
+                document.getElementById("left-out").addEventListener("click", function(){
+                   leftoutdo();
+                });
+                document.getElementById("right-out").addEventListener("click", function(){
+                    rightoutdo();
+                });
+            }
+
+
+        init();
+    </script>
 </body>
 </html>

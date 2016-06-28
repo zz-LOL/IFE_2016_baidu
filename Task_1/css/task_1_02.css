@@ -6,10 +6,11 @@ header{background-color:#337AB7;width:100%;padding:10px 0;}
 .main-nav{position:relative;margin:0 auto;width:1000px;}
 .header-logo{width:200px;}
 img{max-width:100%;}
-.nav-navbar{margin: 0px;padding: 0px;position: absolute;right: 0px;top: 50%;margin-top: -10px;font-size: 12px;}
-.nav-navbar li{float: left;margin-left: 30px;}
+.nav-navbar{padding: 0px;position: absolute;right: 0px;top: 50%;margin-top: -10px;font-size: 12px;}
+.nav-navbar li{float: left;margin-left: 40px;display: block;}
 header li a{text-decoration: none;color: #fff;}
 header li a:hover{color: #ff0;}
+
 
 /*文章区*/
 .article{position: relative;margin:0 auto;width: 1000px;padding:10px 20px;background-color: #fff;margin-top: 40px;box-show:10px 10px 10px 10px #666;}

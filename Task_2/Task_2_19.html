@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE_task_2_19</title>
+
+    <style>
+        ul{display: flex;height: 180px;justify-content: flex-start;align-items: flex-end;}
+        li{display: inline-block;margin: 2px;padding: 4px;width: 12px;font-size: 8px;color: #fff;text-align: center;list-style: none;}
+    </style>
+</head>
+
+<body>
+
+<input id="num-input" type="text">
+<input type="button" value="左侧入">
+<input type="button" value="右侧入" >
+<input type="button" value="左侧出">
+<input type="button" value="右侧出">
+<input type="button" value="随机生成一组数据">
+<input type="button" value="排序">
+<ul id="container">
+
+</ul>
+
+<script type="text/javascript">
+    function addEvent(element, event, listener){
+        if(element.addEventListener){
+            element.addEventListener(event, listener);
+        }else if(element.attachEvent){
+            element.attachEvent("on" + event, listener);
+        }else{
+            element["on" + event] = listener;
+        }
+    }
+    /*为数组中每一个数添加上函数*/
+    function each(ele, fn){
+        for(var cur=0; cur<ele.length; cur++){
+            fn(ele[cur], cur);
+        }
+    }
+
+    window.onload = function(){
+        var container = document.getElementById("container");
+        var buttonList = document.getElementsByTagName("input");
+        var str = [];
+        var queue = {
+            leftin: function(num){
+                console.log("leftin");
+                str.unshift(num);
+                this.paint();
+            },
+
+            rightin: function(num){
+                str.push(num);
+                this.paint();
+            },
+
+            isEmpty: function(){
+                return (str.length == 0);
+            },
+
+            leftout: function(){
+                if(!this.empty){
+                    alert(str.shift());
+                    this.paint();
+                }else{
+                    alert("there has no number!");
+                }
+            },
+
+            rightout: function(){
+                if(!this.empty){
+                    alert(str.pop());
+                    this.paint();
+                }else{
+                    alert("there has no number!");
+                }
+            },
+
+            delId: function(id){
+                console.log(id);
+                str.splice(id, 1);
+                this.paint();
+            },
+
+         /*随机生成颜色的函数*/
+            rancolor: function(){
+                var colorstr =["#FF4D00","#FFBF00","#00FFFF","#66FF00","#6495ED","#DA70D6","#C0C0C0","#8CE600","#FF8C69","#00FA9A"];
+                var i = Math.floor(Math.random()*10);
+                return colorstr[i];
+            },
+
+         /*验证用户输入的函数*/
+            inputnum: function(input){
+
+                if(str.length >= 60){alert("数据已满");return 0;}
+                if(input >= 100 || input <= 10){ alert("数据不合法"); return 0;}
+                if(!(/^[0-9]+$/).test(input)){ alert("请输入整数"); return 0;}
+                return input;
+            },
+
+         /*更新函数加上柱状颜色数字*/
+            paint: function(){
+                console.log("paint");
+                container.innerHTML = "";
+                for(var i=0; i<str.length; i++){
+                    var lielement = document.createElement("li");
+                    lielement.innerText = str[i];
+                    lielement.style.height=str[i]*1.6 + "px";
+                    console.log(lielement.style.height);
+                    lielement.style.backgroundColor = queue.rancolor();
+                    lielement.setAttribute("id","li-"+i);
+                    container.appendChild(lielement);
+                }
+               /* each(this.str, function(item){str+= "<div>" + parseInt(item) + "</div>"});
+                container.innerHTML = str;
+                addDivDelEvent();*/
+
+                buttonList[0].value = "";
+            }
+        }
+
+        /*删除函数不要变化
+        function addDivDelEvent(){
+            for(var cur=0; cur<container.hasChildNodes.length; cur++){
+                addEvent(container.childNodes[cur], "click", function(){
+                    return function(){ return queue.delId(cur);}
+                }(cur));
+            }
+        };*/
+
+        /*随机生成数组*/
+        addEvent(buttonList[5], "click", function(){
+            for(var i=0; i<=50; i++){
+                str[i] = Math.floor((Math.random()*91 + 9));
+            }
+            queue.paint();
+        });
+
+        /*排序算法*/
+        addEvent(buttonList[6], "click", function(){
+            var i= 0, j= 1, temp; len = str.length;
+            var timer = setInterval(run, 10);
+            function run(){
+                if(i < len){
+                    if(j < len){
+                        if(str[i] < str[j]){
+                            temp = str[j];
+                            str[j] = str[i];
+                            str[i] = temp;
+                            queue.paint();
+                        }
+                        j++;
+                    }else{
+                        i++;
+                        j = i + 1;
+                    }
+                }else{
+                    clearInterval(timer);
+                    return;
+                }
+            }
+        });
+
+        /*绑定按钮监听事件*/
+        addEvent(buttonList[1], "click", function(){
+            var input = buttonList[0].value.trim();
+            if(queue.inputnum(input)){
+                queue.leftin(input);
+            }
+        });
+
+        addEvent(buttonList[2], "click", function(){
+            var input = buttonList[0].value;
+            if(queue.inputnum(input)){
+                queue.rightin(input);
+            }
+        });
+
+        addEvent(buttonList[3], "click", function(){queue.leftout();});
+        addEvent(buttonList[4], "click", function(){queue.rightout();});
+    }
+</script>
+</body>
+</html>

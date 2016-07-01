@@ -24,7 +24,7 @@
 
     <input id="num-input" type="text">
     <input type="button" value="左侧入">
-    <input type="button" value="右侧入" style="margin-right: 25px">
+    <input type="button" value="右侧入" >
     <input type="button" value="左侧出">
     <input type="button" value="右侧出">
 
@@ -34,104 +34,102 @@
 
     <script type="text/javascript">
         function addEvent(element, event, listener){
-            if(element.addEventListener()){
-                element.addEventListener(event, listener, false);
-            }else if(element.attachEvent()){
+            if(element.addEventListener){
+                element.addEventListener(event, listener);
+            }else if(element.attachEvent){
                 element.attachEvent("on" + event, listener);
             }else{
                 element["on" + event] = listener;
             }
         }
 
-        function each(arr, fn){
-            for(var cur= 0; cur<arr.length; cur++){
-                fn(arr[cur], cur);
+        function each(ele, fn){
+            for(var cur=0; cur<ele.length; cur++){
+                fn(ele[cur], cur);
             }
         }
 
         window.onload = function(){
-            var container = document.getElementById("container");
-            var buttonList = document.getElementsByTagName("input");
+                var container = document.getElementById("container");
+                var buttonList = document.getElementsByTagName("input");
 
-            var queue = {
-                str:[],
+                var queue = {
+                    str: [],
 
-                leftPush: function(num){
-                    this.str.unshift(num);
-                    this.paint();
-                },
+                    leftin: function(num){
+                        this.str.unshift(num);
+                        this.paint();
+                    },
 
-                rightPush: function(num){
-                    this.str.push(num);
-                    this.paint();
-                },
+                    rightin: function(num){
+                        this.str.push(num);
+                        this.paint();
+                    },
 
-                isEmpty: function(){
-                    return (this.str.length == 0);
-                },
+                    isEmpty: function(){
+                        return (this.str.length == 0);
+                    },
 
-                leftPop: function(){
-                    if(!this.str.isEmpty()){
-                        alert(this.str.pop());
-                        this.paint;
-                    }else{
-                        alert("The queue is already Empty!");
+                    leftout: function(){
+                        if(!this.empty){
+                            alert(this.str.shift());
+                            this.paint();
+                        }else{
+                            alert("there has no number!");
+                        }
+                    },
+
+                    rightout: function(){
+                        if(!this.empty){
+                           alert(this.str.pop());
+                            this.paint();
+                        }else{
+                            alert("there has no number!");
+                        }
+                    },
+
+                    delId: function(id){
+                        console.log(id);
+                        this.str.splice(id, 1);
+                        this.paint();
+                    },
+
+                    paint: function(){
+                        var str = "";
+                        each(this.str, function(item){str+= "<div>" + parseInt(item) + "</div>"});
+                        container.innerHTML = str;
+                        addDivDelEvent();
                     }
-                },
-
-                rightPop: function(){
-                    if(!this.str.isEmpty()){
-                        alert(this.str.shift());
-                        this.paint;
-                    }else{
-                        alert("The queue is already Empty!");
-                    }
-                },
-
-                paint: function(){
-                    var str="";
-                    each(this.str, function(item){str+="<div>"+ parseInt(item) +"</div>"});
-                    container.innerHTML = str;
-                    addDivDelEvent();
-                },
-
-                deleteID: function(id){
-                    console.log(id);
-                    this.str.splice(id, 1);
-                    this.paint();
                 }
-            }
 
             function addDivDelEvent(){
-                for(var cur=0; cur<container.childNodes.length; cur++){
-                    addEvent(container.childNodes[cur], "click", function(cur){
-                        return function(){
-                            return queue.deleteID(cur);
-                        }
+                for(var cur=0; cur<container.hasChildNodes.length; cur++){
+                    addEvent(container.childNodes[cur], "click", function(){
+                        return function(){ return queue.delId(cur);}
                     }(cur));
                 }
-            }
+            };
 
             addEvent(buttonList[1], "click", function(){
                 var input = buttonList[0].value;
                 if((/^[0-9]+$/).test(input)){
-                    queue.leftPush(input);
+                    queue.leftin(input);
                 }else{
-                    alert("Please input integer");
+                    alert("Please input integer!");
                 }
             });
 
             addEvent(buttonList[2], "click", function(){
                 var input = buttonList[0].value;
                 if((/^[0-9]+$/).test(input)){
-                    queue.rightPush(input);
+                    queue.rightin(input);
                 }else{
-                    alert("Please input integer");
+                    alert("Please input integer!");
                 }
             });
 
-            addEvent(buttonList[3], "click", function(){queue.leftPop();});
-            addEvent(buttonList[4], "click", function(){queue.rightPop();});
+            addEvent(buttonList[3], "click", function(){queue.leftout();});
+            addEvent(buttonList[4], "click", function(){queue.rightout();});
         }
     </script>
 </body>

@@ -108,7 +108,7 @@
                     var lielement = document.createElement("li");
                     lielement.innerText = str[i];
                     lielement.style.height=str[i]*1.6 + "px";
-                    console.log(lielement.style.height);
+
                     lielement.style.backgroundColor = queue.rancolor();
                     lielement.setAttribute("id","li-"+i);
                     container.appendChild(lielement);
@@ -130,6 +130,14 @@
             }
         };*/
 
+        /*点击删除li函数*/
+        addEvent(container, "click", function(e){
+             if(e.target.nodeName != "LI") return;
+             var liid = parseInt(e.target.getAttribute("id").substr(3));
+             str.splice(liid, 1);
+             queue.paint();
+        });
+
         /*随机生成数组*/
         addEvent(buttonList[5], "click", function(){
             for(var i=0; i<=50; i++){
@@ -140,26 +148,28 @@
 
         /*排序算法*/
         addEvent(buttonList[6], "click", function(){
-            var i= 0, j= 1, temp; len = str.length;
-            var timer = setInterval(run, 10);
+            var i, j, temp; len = str.length;
+            var timer = setInterval(run, 100);
+            /*run一下就执行完了，要setInterval也没有用*/
             function run(){
-                if(i < len){
-                    if(j < len){
-                        if(str[i] < str[j]){
-                            temp = str[j];
-                            str[j] = str[i];
-                            str[i] = temp;
-                            queue.paint();
-                        }
-                        j++;
-                    }else{
-                        i++;
-                        j = i + 1;
-                    }
-                }else{
+                console.log("run");
+                if(j<=1){
                     clearInterval(timer);
-                    return;
+
+                }else{
+                    for(j = len-1; j >= 1; j--){
+                        for(i = 0; i <= j; i++){
+                            if(str[i] > str[i+1]) {
+                                temp = str[i];
+                                str[i] = str[i+1];
+                                str[i+1] = temp;
+                                queue.paint();
+
+                            }
+                        }
+                    }
                 }
+
             }
         });
 

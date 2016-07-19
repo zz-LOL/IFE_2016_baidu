@@ -21,6 +21,10 @@
             height: 200px;
             resize: none;
         }
+        .select{
+            font-size: 40px;
+            color: #000;
+        }
     </style>
 </head>
 
@@ -29,15 +33,15 @@
 <input id="num-input" type="text" >
 <input type="button" value="输入">
 <input type="button" value="查询" >
-<input type="button" value="左侧出">
+<!--<input type="button" value="左侧出">
 <input type="button" value="右侧出">
-
+-->
 <div id="container">
 
 </div>
 
 <script type="text/javascript">
-    function addEvent(element, event, listener){
+    /*function addEvent(element, event, listener){
         if(element.addEventListener){
             element.addEventListener(event, listener);
         }else if(element.attachEvent){
@@ -52,11 +56,12 @@
             fn(ele[cur], cur);
         }
     }
-
+*/
     window.onload = function(){
         var container = document.getElementById("container");
         var buttonList = document.getElementsByTagName("input");
         var text = document.getElementById("textarea");
+        var sea = document.getElementById("num-input");
         var input1 = [];
         var queue = {
 
@@ -115,15 +120,18 @@
              }
             */
 
-            render: function(){
+            render: function(str){
                 container.innerHTML = input1.map(function(d){
+                    if(str != null && str.length > 0){
+                        d = d.replace(new RegExp(str, "g"), "<span class='select'>" + str + "</span>");
+                    }
                     return '<div>' + d + '</div>';
                 }).join('');
             }
         }
 
 
-        };
+
 
         addEvent(buttonList[1], "click", function(){
             var input = text.value.trim();
@@ -149,8 +157,8 @@
         });
 
         addEvent(buttonList[2], "click", function(){
-            var input = text.value;
-            queue.rightin(input);
+            var input = sea.value.trim();
+            queue.render(input);
 
             /*if((/^[0-9]+$/).test(input)){
                 queue.rightin(input);
@@ -160,8 +168,8 @@
 
         });
 
-        addEvent(buttonList[3], "click", function(){queue.leftout();});
-        addEvent(buttonList[4], "click", function(){queue.rightout();});
+        /*addEvent(buttonList[3], "click", function(){queue.leftout();});
+        addEvent(buttonList[4], "click", function(){queue.rightout();});*/
     }
 </script>
 </body>

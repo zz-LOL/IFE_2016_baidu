@@ -11,7 +11,6 @@
             text-align: center;
             padding: 0 15px;
             margin: 4px 2px;
-
             height: 50px;
             line-height: 50px;
             background-color: red;
@@ -27,9 +26,9 @@
 
 <body>
 <textarea id="textarea" placeholder="请输入字符并用不同符号分隔"></textarea>
-<input id="num-input" type="text">
-<input type="button" value="左侧入">
-<input type="button" value="右侧入" >
+<input id="num-input" type="text" >
+<input type="button" value="输入">
+<input type="button" value="查询" >
 <input type="button" value="左侧出">
 <input type="button" value="右侧出">
 
@@ -58,10 +57,10 @@
         var container = document.getElementById("container");
         var buttonList = document.getElementsByTagName("input");
         var text = document.getElementById("textarea");
-
+        var input1 = [];
         var queue = {
-            str: [],
 
+            /* str: [],
             leftin: function(num){
                 console.log(num);
                 this.str.unshift(num);
@@ -106,21 +105,41 @@
                 each(this.str, function(item){str+= "<div>" + item + "</div>"});
                 container.innerHTML = str;
                 addDivDelEvent();
+            },
+
+             function addDivDelEvent(){
+             for(var cur=0; cur<container.hasChildNodes.length; cur++){
+             addEvent(container.childNodes[cur], "click", function(){
+             return function(){ return queue.delId(cur);}
+             }(cur));
+             }
+            */
+
+            render: function(){
+                container.innerHTML = input1.map(function(d){
+                    return '<div>' + d + '</div>';
+                }).join('');
             }
         }
 
-        function addDivDelEvent(){
-            for(var cur=0; cur<container.hasChildNodes.length; cur++){
-                addEvent(container.childNodes[cur], "click", function(){
-                    return function(){ return queue.delId(cur);}
-                }(cur));
-            }
+
         };
 
         addEvent(buttonList[1], "click", function(){
             var input = text.value.trim();
-            queue.leftin(input);
 
+                 input1 = input.split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/).filter(function(e){
+                    if(e.length > 0 && e != null){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                });
+                console.log(input1);
+                /*input2 = input2.concat(input1);
+                console.log(input2);
+            queue.leftin(input1);*/
+                queue.render();
             /*if((/^[0-9]+$/).test(input)){
                 queue.leftin(input);
             }else{

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFR_task_2_20</title>
+
+    <style>
+        #container div {
+            display: inline-block;
+            font-size: 30px;
+            text-align: center;
+            padding: 0 15px;
+            margin: 4px 2px;
+            height: 50px;
+            line-height: 50px;
+            background-color: red;
+            color: #FFFFFF;
+        }
+        #textarea{
+            width: 400px;
+            height: 200px;
+            resize: none;
+        }
+        .select{
+            font-size: 40px;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+<textarea id="textarea" placeholder="请输入字符并用不同符号分隔"></textarea>
+<input id="num-input" type="text" >
+<input type="button" value="输入">
+<input type="button" value="查询" >
+
+<div id="container">
+
+</div>
+
+<script type="text/javascript">
+    function addEvent(element, event, listener){
+        if(element.addEventListener){
+            element.addEventListener(event, listener);
+        }else if(element.attachEvent){
+            element.attachEvent("on" + event, listener);
+        }else{
+            element["on" + event] = listener;
+        }
+    }
+
+    window.onload = function(){
+        var container = document.getElementById("container");
+        var buttonList = document.getElementsByTagName("input");
+        var text = document.getElementById("textarea");
+        var sea = document.getElementById("num-input");
+        var text2 = [];
+        var queue = {
+            render: function(str){
+                container.innerHTML = text2.map(function(s){
+
+                    if(str != null && str.length > 0){
+                        s = s.replace(new RegExp(str, "g"), "<span class='select'>" + str + "</span>");
+                    }
+                    return "<div>" + s + "</div>";
+                }).join("");
+            }
+        }
+
+
+        addEvent(buttonList[1], "click", function(){
+            var text1 = text.value.trim();
+            console.log(text1);
+                 text2 = text1.split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/).filter(function(e){
+                    if(e.length>0 && e != null){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                 })
+            console.log(text2);
+            queue.render();
+        })
+
+        addEvent(buttonList[2], "click", function(){
+            var sea1 = sea.value.trim();
+            queue.render(sea1);
+
+        });
+    }
+</script>
+</body>
+</html>

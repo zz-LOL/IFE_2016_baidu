@@ -51,7 +51,23 @@ Tag: <input id="num-input" type="text" placeholder="掌握技能">
          container = document.getElementById("container");
 
     window.onload = function(){
-        addEvent(input, 'keyup', showTag);
+        addEvent(input, "keyup", showTag);
+
+        addEvent(container, "mouseover", function(e){
+            if(e.target && e.target.nodeName == "DIV"){
+                e.target.firstChild.insertData(0,"快速删除");
+                e.target.style.backgroundColor = "#78BCFB";
+            }
+
+         addEvent(container, "mouseout", function(e){
+             if(e.target && e.target.nodeName == "DIV"){
+                 e.target.firstChild.deleteData(0, 4);
+                 e.target.style.background = "red";
+             }
+         })
+        });
+
+
     }
 
 
@@ -78,19 +94,24 @@ Tag: <input id="num-input" type="text" placeholder="掌握技能">
         this.render();
     };
 
+    CreatList.prototype.leftShift =  function(){
+        this.queue.shift();
+        this.render();
+    }
     /*子继承父方法*/
     var tagObj = new CreatList(container);
 
     function showTag(){
         if(/[,，;；、\s\n]+/.test(input.value) || event.keyCode == 13) {
-            var data = splitInput(input.value),
-                    newTag = data[0];
+            var data = splitInput(input.value);
+
+             var    newTag = data[0];
             /*看看tagObj中包含newTag吗*/
             if (tagObj.queue.indexOf(newTag) === -1) {
                 tagObj.rightPush(newTag);
-                /*if(tagObj.queue.length > 10){
+                if(tagObj.queue.length > 10){
                  tagObj.leftShift();
-                 }*/
+                 }
             }
             tagObj.render();
             input.value = "";

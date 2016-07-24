@@ -5,7 +5,7 @@
     <title>IFR_task_2_21</title>
 
     <style>
-        #container span {
+        #container span,#showtag span {
             display: inline-block;
             font-size: 30px;
             text-align: center;
@@ -35,6 +35,8 @@ Tag: <input id="num-input" type="text" placeholder="掌握技能">
 <div id="container"></div>
 <br/><br/><br/><br/><br/><br/>
 <textarea id="textarea" placeholder="请输入您的兴趣爱好"></textarea>
+<input id="textshow" value="确认兴趣爱好" type="button">
+<div id="showtag"></div>
 
 <script type="text/javascript">
     /*兼容点击事件*/
@@ -48,11 +50,17 @@ Tag: <input id="num-input" type="text" placeholder="掌握技能">
         }
     }
 
+    /*提取网页上信息*/
     var input = document.getElementById("num-input"),
-         container = document.getElementById("container");
+         container = document.getElementById("container"),
+         text = document.getElementById("textarea"),
+         textshow = document.getElementById("textshow"),
+         showtag = document.getElementById("showtag");
 
+    /*点击事件*/
     window.onload = function(){
         addEvent(input, "keyup", showTag);
+        addEvent(textshow, "click", showHobby);
 
         addEvent(container, "mouseover", function(e){
             if(e.target && e.target.nodeName == "SPAN") {
@@ -76,9 +84,9 @@ Tag: <input id="num-input" type="text" placeholder="掌握技能">
 
     }
 
-
+/*splitInput做到复用了*/
     function splitInput(str){
-        var inputArray = str.trim().split(/[,，;；、\s\n]+/);
+        var inputArray = str.trim().split(/[.。/,，;；、\s\n]+/);
         return inputArray;
     }
 
@@ -90,7 +98,7 @@ Tag: <input id="num-input" type="text" placeholder="掌握技能">
             this.queue.forEach(function(e){
                 str += "<span>" + e + "</span>";
             });
-            container.innerHTML = str;
+            divList.innerHTML = str;
         }
     }
 
@@ -104,9 +112,12 @@ Tag: <input id="num-input" type="text" placeholder="掌握技能">
         this.queue.shift();
         this.render();
     }
+
     /*子继承父方法*/
     var tagObj = new CreatList(container);
+    var textObj = new CreatList(showtag);
 
+    /*实际的方法*/
     function showTag(){
         if(/[,，;；、\s\n]+/.test(input.value) || event.keyCode == 13) {
             var data = splitInput(input.value);
@@ -124,7 +135,20 @@ Tag: <input id="num-input" type="text" placeholder="掌握技能">
         }
     }
 
-
+    function showHobby(){
+        var data = splitInput(text.value);
+        console.log(data);
+        data.forEach(function(e){
+            if(textObj.queue.indexOf(e) === -1){
+                textObj.rightPush(e);
+                if(textObj.queue.length > 10){
+                    textObj.leftShift();
+                }
+            }
+            textObj.render();
+            text.value = "";
+        })
+    }
 
 </script>
 </body>

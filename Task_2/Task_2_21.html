@@ -137,7 +137,6 @@ Tag: <input id="num-input" type="text" placeholder="掌握技能">
 
     function showHobby(){
         var data = splitInput(text.value);
-        console.log(data);
         data.forEach(function(e){
             if(textObj.queue.indexOf(e) === -1){
                 textObj.rightPush(e);

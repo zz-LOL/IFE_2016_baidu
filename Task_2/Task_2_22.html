@@ -86,7 +86,7 @@
         return document.querySelector(ele);
     }
 
-    function visitTreeNode(node){
+    function visitTreeNode(node){               //渲染选中div
         node.style.backgroundColor = "pink";
         setTimeout(function(){
             node.style.backgroundColor = "white"
@@ -99,32 +99,34 @@
         var stack = [];
         var func;
         if(value === "1") {
-            func = function fn(root) {
+
+            func = function fn(root) {          // 查看还有子节点吗?
                 if (!root) {
                     return;
                 }
-                stack.push(function () {
-                    visitTreeNode(root);
+
+                stack.push(function () {        //二叉树先序遍历v
+                    visitTreeNode(root);          //调用visitTreeNode函数进行渲染
                 })
-                fn(root.firstElementChild);
+                fn(root.firstElementChild);         //循环fn函数到左右子节点
                 fn(root.lastElementChild);
             }
         }
         return function(root){
-            $("#btnStart").disabled = true;
+            $("#btnStart").disabled = true;         //点击“开始遍历”成功后不准点击
             func(root);
-            var it = setInterval(function(){
+            var it = setInterval(function(){        //如果stack里没有元素就停止遍历？
                 if(stack.length === 0){
                     clearInterval(it);
                     $("#btnStart").disabled = false;
                     return;
                 }
-                stack.shift()();
+                stack.shift()();                    //stack数组删除第一个元素
             },1000);
         }
     }
 
-    addEvent($("#btnStart"), "click", function(e){
+    addEvent($("#btnStart"), "click", function(e){          //点击出发getFnTraverse函数
         var select = $("#selectMode");
         var value = select[select.selectedIndex].value;
         getFnTraverse(value)($("#tree"));

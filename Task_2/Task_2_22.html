@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task_2_22</title>
+    <style>
+        body{text-align: center;}
+        div{
+            border: 2px solid gray;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            margin: 36px 24px;
+            -webkit-flex-grow: 1;
+
+            flex-grow: 1;
+            transition: background-color 1000ms;
+        }
+        #tree{
+            width: 80%;
+            height: 300px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <from>
+        <select id="selectMode">
+            <option value="1">先序</option>
+            <option value="2">中序</option>
+            <option value="3">后序</option>
+        </select>
+        <input type="button" value="开始遍历" id="btnStart">
+    </from>
+    <div id="tree">
+        <div>
+            <div>
+                <div>
+
+                </div>
+                <div>
+
+                </div>
+            </div>
+            <div>
+                <div>
+
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+
+                </div>
+                <div>
+
+                </div>
+            </div>
+            <div>
+                <div>
+
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+    function addEvent(ele, event, fn){
+        if(window.addEventListener){
+            ele.addEventListener(event, fn);
+        }else if(window.attachEvent){
+            ele.attachEvent("on" + event, fn);
+        }else{
+            ele["on" + event] = fn;
+        }
+    }
+
+    var $ = function(ele){
+        return document.querySelector(ele);
+    }
+
+    function visitTreeNode(node){
+        node.style.backgroundColor = "pink";
+        setTimeout(function(){
+            node.style.backgroundColor = "white"
+        },1000)
+    }
+
+
+
+    function getFnTraverse(value){
+        var stack = [];
+        var func;
+        if(value === "1") {
+            func = function fn(root) {
+                if (!root) {
+                    return;
+                }
+                stack.push(function () {
+                    visitTreeNode(root);
+                })
+                fn(root.firstElementChild);
+                fn(root.lastElementChild);
+            }
+        }
+        return function(root){
+            $("#btnStart").disabled = true;
+            func(root);
+            var it = setInterval(function(){
+                if(stack.length === 0){
+                    clearInterval(it);
+                    $("#btnStart").disabled = false;
+                    return;
+                }
+                stack.shift()();
+            },1000);
+        }
+    }
+
+    addEvent($("#btnStart"), "click", function(e){
+        var select = $("#selectMode");
+        var value = select[select.selectedIndex].value;
+        getFnTraverse(value)($("#tree"));
+    })
+</script>
+</body>
+</html>

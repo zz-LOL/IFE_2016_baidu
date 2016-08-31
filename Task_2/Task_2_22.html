@@ -12,7 +12,6 @@
             display: flex;
             margin: 36px 24px;
             -webkit-flex-grow: 1;
-
             flex-grow: 1;
             transition: background-color 1000ms;
         }
@@ -93,26 +92,52 @@
         },1000)
     }
 
-
+/*怎么确定stack里的div数组*/
 
     function getFnTraverse(value){
         var stack = [];
         var func;
         if(value === "1") {
 
-            func = function fn(root) {          // 查看还有子节点吗?
+            func = function fn(root) {          // 查看还有子节点吗?  这代码是func()还是fn()?
                 if (!root) {
                     return;
                 }
 
-                stack.push(function () {        //二叉树先序遍历v
+                stack.push(function () {        //二叉树先序遍历，并把遍历的数放入stack数组中
                     visitTreeNode(root);          //调用visitTreeNode函数进行渲染
                 })
-                fn(root.firstElementChild);         //循环fn函数到左右子节点
+                fn(root.firstElementChild);         //遍历div的首个孩子（左孩子节点是这样确定的）
                 fn(root.lastElementChild);
             }
+        }else if(value === "2"){                //中序遍历
+            func = function fn(root){
+                if(!root){
+                    return;
+                }
+
+                fn(root.firstElementChild);
+                stack.push(function(){
+                    visitTreeNode(root);
+                })
+                fn(root.lastElementChild);
+            }
+        }else if(value === "3"){                //后序遍历
+            func = function fn(root) {
+                if (!root) {
+                    return;
+                }
+
+                fn(root.firstElementChild);
+                fn(root.lastElementChild);
+                stack.push(function () {
+                    visitTreeNode(root);
+                })
+
+            }
         }
-        return function(root){
+
+            return function(root){
             $("#btnStart").disabled = true;         //点击“开始遍历”成功后不准点击
             func(root);
             var it = setInterval(function(){        //如果stack里没有元素就停止遍历？
@@ -126,7 +151,7 @@
         }
     }
 
-    addEvent($("#btnStart"), "click", function(e){          //点击出发getFnTraverse函数
+    addEvent($("#btnStart"), "click", function(e){          //点击触发getFnTraverse函数
         var select = $("#selectMode");
         var value = select[select.selectedIndex].value;
         getFnTraverse(value)($("#tree"));

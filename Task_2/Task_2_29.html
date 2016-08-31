@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>验证输入</title>
+    <style>
+        .content{text-align: center;margin-top: 50px;}
+        .prompt{margin-left: -28px;font-size: 12px;color: #AAAAAA;}
+        .verify{margin-left: 15px;border-radius: 4px;background-color: #38f;color: #fff;border:1px solid #38f;box-shadow: none;outline:none;}
+    </style>
+    <script>
+    window.onload = function() {
+        var verifys = document.getElementsByClassName("verify");
+        var verify = verifys[0];
+        var prompts = document.getElementsByClassName("prompt");
+        var prompt = prompts[0];
+
+        verify.addEventListener("click", function () {
+            var text = document.getElementById("input");
+            var textValue = document.getElementById("input").value;
+            console.log(countLength(textValue));
+            if (countLength(textValue) == 0) {
+                prompt.innerHTML = "用户名不能为空";
+                prompt.style.color = "red";
+                text.style.borderColor = "red";
+            } else if (countLength(textValue) >= 4 && countLength(textValue) <= 6) {
+                prompt.innerHTML = "名称格式正确";
+                prompt.style.color = "green";
+                text.style.borderColor = "green";
+            } else {
+                prompt.innerHTML = "长度不正确";
+                prompt.style.color = "red";
+                text.style.borderColor = "red";
+            }
+        });
+
+        function countLength(str) {
+            var inputLength = 0;
+            for (var i = 0; i < str.length; i++) {
+                var countCode = str.charCodeAt(i);
+                if (countCode >= 0 && countCode <= 128) {
+                    inputLength += 1;
+                } else {
+                    inputLength += 2;
+                }
+            }
+            return inputLength;
+        }
+    }
+    </script>
+</head>
+<body>
+
+<div class="content">
+    <span>用户名：</span><input type="text" id="input" placeholder="用户名" /><input type="button" class="verify" value="验证"><br/>
+    <span class="prompt">必填，长度为4~~6个字符</span>
+</div>
+</body>
+</html>

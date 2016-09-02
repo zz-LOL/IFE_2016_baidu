@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单验证</title>
+    <style>
+        .content{width: 300px;margin-top: 50px;}
+        .prompt{display: none;margin-left: 65px;margin-top: 5px;font-size: 12px;color: #AAAAAA;}
+        .verify{margin-left: 15px;border-radius: 4px;background-color: #38f;color: #fff;border:1px solid #38f;box-shadow: none;outline:none;}
+        .gap{margin-top: 10px;}
+    </style>
+    <script>
+        window.onload = function() {
+            var verifys = document.getElementsByClassName("verify");
+            var verify = verifys[0];
+            var prompts = document.getElementsByClassName("prompt");
+            var prompt0 = prompts[0];
+            var prompt1 = prompts[1];
+            var prompt2 = prompts[2];
+            var prompt3 = prompts[3];
+            var text = document.getElementById("input");
+            var text1 = document.getElementById("input1");
+            var text2 = document.getElementById("input2");
+            var text3 = document.getElementById("input3");
+
+            verify.addEventListener("click", function(){
+
+                for(var i=0;i<prompts.length;i++){
+
+                    if(prompts[i].style.color != "green"){
+                        alert("输入有误");
+                        return;
+                    }
+                }
+                alert("验证成功");
+            });
+
+            text.addEventListener("focus", function(){
+                prompt0.style.display = "block";
+            });
+
+            text.addEventListener("blur", function () {
+                var textValue = document.getElementById("input").value;
+                showHint(textValue, prompt0, text);
+            });
+            text1.addEventListener("focus", function(){
+                prompt1.style.display = "block";
+            });
+
+            text1.addEventListener("blur", function () {
+                var textValue = document.getElementById("input1").value;
+                showHint(textValue, prompt1, text1);
+            });
+            text2.addEventListener("focus", function(){
+                prompt2.style.display = "block";
+            });
+
+            text2.addEventListener("blur", function () {
+                var textValue = document.getElementById("input2").value;
+                testCorrect(textValue, prompt2, text2);
+            });
+
+            function testCorrect(textV, prompt, text){
+                var textA = document.getElementById("input1").value;
+                if(textV == textA && textV.length != 0){
+                    prompt.innerHTML = "长度正确";
+                    prompt.style.color = "green";
+                    text.style.borderColor = "green";
+                } else{
+                    prompt.innerHTML = "密码错误";
+                    prompt.style.color = "red";
+                    text.style.borderColor = "red";
+                }
+            }
+
+            function showHint(textValue, prompt, text){
+                if (countLength(textValue) == 0) {
+                    prompt.innerHTML = "不能为空";
+                    prompt.style.color = "red";
+                    text.style.borderColor = "red";
+                } else if (countLength(textValue) >= 4 && countLength(textValue) <= 6) {
+                    prompt.innerHTML = "长度正确";
+                    prompt.style.color = "green";
+                    text.style.borderColor = "green";
+                } else {
+                    prompt.innerHTML = "长度不正确";
+                    prompt.style.color = "red";
+                    text.style.borderColor = "red";
+                }
+            }
+
+            text3.addEventListener("focus", function(){
+                prompt3.style.display = "block";
+            });
+
+            text3.addEventListener("blur", function () {
+                var x=document.forms["myForm"]["email"].value;
+                var atpos=x.indexOf("@");
+                var dotpos=x.lastIndexOf(".");
+                if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length){
+                    prompt3.innerHTML = "email格式不正确";
+                    prompt3.style.color = "red";
+                    text3.style.borderColor = "red";
+                }else{
+                    prompt3.innerHTML = "email正确";
+                    prompt3.style.color = "green";
+                    text3.style.borderColor = "green";
+                }
+            });
+
+            function countLength(str) {
+                var inputLength = 0;
+                for (var i = 0; i < str.length; i++) {
+                    var countCode = str.charCodeAt(i);
+                    if (countCode >= 0 && countCode <= 128) {
+                        inputLength += 1;
+                    } else {
+                        inputLength += 2;
+                    }
+                }
+                return inputLength;
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="content">
+    <form name="myForm"   >
+        <span>用户名：</span><input type="text" id="input" placeholder="用户名" /><br/>
+        <span class="prompt">必填，长度为4~~6个字符</span>
+
+            <div class="gap">
+                <span>密&nbsp;码：</span><input type="password" id="input1" placeholder="4~~6位" />
+                <span class="prompt">必填，长度为4~~6个字符</span>
+            </div>
+
+            <div class="gap">
+                <span>密码确认：</span><input type="password" id="input2" placeholder="再次输入密码" />
+                <span class="prompt">再次输入相同的密码</span>
+            </div>
+
+            <div class="gap">
+
+                    Email: <input type="text" name="email" id="input3">
+                        <span class="prompt">请输入正确的邮箱</span>
+            </div>
+
+        <input type="button" class="verify" value="验证">
+     </form>
+</div>
+</body>
+</html>

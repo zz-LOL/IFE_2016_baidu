@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单工厂模块模式</title>
+    <style>
+        .from{display: block;width: 960px;margin:0 auto;}
+        table{margin:20px 0;}
+        table td{padding: 5px;}
+        input{width: 300px;height: 30px;font-size: 18px;}
+        label{display: block;width: 100%;font-weight: bold;text-align: right;}
+        #submit{cursor: pointer;width: 100px;height: 30px;font-size: 20px;margin-left: 15px;border-radius: 4px;background-color: #38f;color: #fff;border:1px solid #38f;box-shadow: none;outline:none;}
+    </style>
+</head>
+<body>
+    <from class="from" method="post" action="">
+        <table>
+            <tr>
+                <td><label>名称：</label></td>
+                <td><input type="text" placeholder="请输入名称" id="names"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span id="nameWarn"></span></td>
+            </tr>
+            <tr>
+                <td><label>密码：</label></td>
+                <td><input type="password" placeholder="请输入密码" id="pasd"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span id="pasdWarn"></span></td>
+            </tr>
+            <tr>
+                <td><label>确认密码：</label></td>
+                <td><input type="password" placeholder="请输入相同密码" id="twicePasd"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span id="twicePasdWarn"></span></td>
+            </tr>
+            <tr>
+                <td><label>邮箱：</label></td>
+                <td><input type="text" placeholder="请输入正确的邮箱地址" id="email"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span id="emailWarn"></span></td>
+            </tr>
+            <tr>
+                <td><label>手机：</label></td>
+                <td><input type="text" placeholder="请输入手机号" id="phone"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span id="phoneWarn"></span></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button id="submit">提交</button></td>
+            </tr>
+        </table>
+    </from>
+
+<script>
+function addEvent(ele, event, fn){
+    if(window.addEventListener){
+        ele.addEventListener(event, fn);
+    }else if(window.attachEvent){
+        ele.attachEvent("on" + event, fn);
+    }else{
+        ele["on" + event] = fn;
+    }
+}
+
+var check = (function(){
+
+    var nameArr = ["必填，长度为4~~6个字符", "名称不能为空", "名称不能包含除中文、英文及数字以外的字符", "名称长度过短", "名称长度过长", "名称可用"];
+    var pasdArr = ["必填，长度为4~~6个字符", "密码不能为空","密码不能包含除英文及数字以外的字符","密码长度过短","密码长度过长","密码可用"];
+    var pasdAgain = ["必填，长度为4~~6个字符", "密码不能为空", "两次密码不相同", "密码正确"];
+    var emailArr = ["邮箱不能为空","邮箱格式错误","邮箱格式正确"];
+    var phoneArr = ["手机号码不能为空","手机号码格式错误","手机号码格式正确"];
+    var nowPasd = "";
+
+    return {
+        checkName: function(str){
+            var count = 0;
+            if(str == "") return nameArr[1];
+            else if(/[^0-9a-z\u4e00-\u9fa5]/i.test(str))return nameArr[2];
+            else{
+                for(var i=0;i<str.length;i++){
+                    if(/[a-z0-9]/i.test(str[i]))count++;
+                    else count+=2;
+                }
+                if(count<4) return nameArr[3];
+                if(count>6) return nameArr[4];
+            }
+            return nameArr[5];
+        },
+        checkPasd: function(str){
+            var count = 0;
+            if(str == "") return pasdArr[1];
+            else if(/[^a-z0-9]/i.test(str)) return pasdArr[2];
+            else{
+                for(var i=0;i<str.length;i++){
+                    if(/[a-z0-9]/i.test(str[i]))count++;
+                }
+                if(count<4) return pasdArr[3];
+                if(count>8) return pasdArr[4];
+                else{
+                    nowPasd = str;
+                    return pasdArr[5];
+                }
+            }
+
+        },
+        pasdVerify: function(str){
+            if(str == "") return pasdAgain[1];
+            if(str == nowPasd){
+                return pasdAgain[3];
+            }else   return pasdAgain[2];
+        },
+        checkEmail: function(str){
+            var atpos=str.indexOf("@");
+            var dotpos=str.lastIndexOf(".");
+            if (atpos<1 || dotpos<atpos+2 || dotpos+2>=str.length){
+                return emailArr[1];
+            }else{
+                return emailArr[2];
+            }
+        },
+        checkPhone: function(str){
+            if(str==="")return phoneArr[0];
+            else if(/^\d{11}$/.test(str))return phoneArr[2];
+            else return phoneArr[1];
+        }
+    }
+})();
+
+window.onload = function(){
+    (function(){
+        var names=document.getElementById("names");
+        var nameWarn=document.getElementById("nameWarn");
+        var password=document.getElementById("pasd");
+        var passwordWarn=document.getElementById("pasdWarn");
+        var passwordAgain=document.getElementById("twicePasd")
+        var againWarn=document.getElementById("twicePasdWarn");
+        var email=document.getElementById("email");
+        var emailWarn=document.getElementById("emailWarn");
+        var phone=document.getElementById("phone");
+        var phoneWarn=document.getElementById("phoneWarn");
+        var submit=document.getElementById("submit");
+
+        function focusIn(input, text){
+            text.style.color="#aaa";
+            input.style.borderColor="#ccc";
+        }
+        addEvent(names, "focus", function(){
+           // nameWarn.innerHTML = check.nameArr[0];
+            nameWarn.innerHTML = "必填，长度为4~~6个字符";
+            focusIn(names, nameWarn);
+        });
+        addEvent(names, "blur", function(){
+            nameWarn.innerHTML = check.checkName(names.value);
+            if(nameWarn.innerHTML=="名称可用"){
+                names.style.borderColor="#5fb844";
+                nameWarn.style.color="#5fb844";
+            }
+            else {
+                names.style.borderColor="#de0011";
+                nameWarn.style.color="#de0011";
+            }
+        });
+        addEvent(password, "focus", function(){
+            // nameWarn.innerHTML = check.nameArr[0];
+            passwordWarn.innerHTML = "必填，长度为4~~6个字符";
+            focusIn(password, passwordWarn);
+        });
+        addEvent(password, "blur", function(){
+            passwordWarn.innerHTML = check.checkPasd(password.value);
+            if(passwordWarn.innerHTML=="密码可用"){
+                password.style.borderColor="#5fb844";
+                passwordWarn.style.color="#5fb844";
+            }
+            else {
+                password.style.borderColor="#de0011";
+                passwordWarn.style.color="#de0011";
+            }
+        });
+        addEvent(passwordAgain, "focus", function(){
+            // nameWarn.innerHTML = check.nameArr[0];
+            againWarn.innerHTML = "请再次输入密码";
+            focusIn(passwordAgain, againWarn);
+        });
+        addEvent(passwordAgain, "blur", function(){
+            againWarn.innerHTML = check.pasdVerify(passwordAgain.value);
+            if(againWarn.innerHTML=="密码正确"){
+                console.log("done");
+                passwordAgain.style.borderColor="#5fb844";
+                againWarn.style.color="#5fb844";
+            }
+            else {
+                passwordAgain.style.borderColor="#de0011";
+                againWarn.style.color="#de0011";
+            }
+        });
+        addEvent(email, "focus", function(){
+            // nameWarn.innerHTML = check.nameArr[0];
+            emailWarn.innerHTML = "请输入邮箱";
+            focusIn(email, emailWarn);
+        });
+        addEvent(email, "blur", function(){
+            emailWarn.innerHTML = check.checkEmail(email.value);
+            if(emailWarn.innerHTML=="邮箱格式正确"){
+                email.style.borderColor="#5fb844";
+                emailWarn.style.color="#5fb844";
+            }
+            else {
+                email.style.borderColor="#de0011";
+                emailWarn.style.color="#de0011";
+            }
+        });
+        addEvent(phone, "focus", function(){
+            // nameWarn.innerHTML = check.nameArr[0];
+            phoneWarn.innerHTML = "请输入手机号";
+            focusIn(phone, phoneWarn);
+        });
+        addEvent(phone, "blur", function(){
+            phoneWarn.innerHTML = check.checkPhone(phone.value);
+            if(phoneWarn.innerHTML=="手机号码格式正确"){
+                phone.style.borderColor="#5fb844";
+                phoneWarn.style.color="#5fb844";
+            }
+            else {
+                phone.style.borderColor="#de0011";
+                phoneWarn.style.color="#de0011";
+            }
+        });
+        addEvent(submit, "click", function(){
+            if(names.style.borderColor=="rgb(95, 184, 68)"&&password.style.borderColor=="rgb(95, 184, 68)"&&passwordAgain.style.borderColor=="rgb(95, 184, 68)"&&email.style.borderColor=="rgb(95, 184, 68)"&&phone.style.borderColor=="rgb(95, 184, 68)"){
+                alert("提交成功");
+            }
+            else alert("输入有误");
+        })
+    })();
+}
+</script>
+</body>
+</html>

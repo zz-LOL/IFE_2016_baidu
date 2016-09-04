@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单</title>
+    <style>
+        .form{width: 500px;margin:0 auto;}
+        .different input{margin-left: 60px;width: 15px;height: 15px; background-color: #3797fc;}
+        span{font-size: 26px;font-weight: bold;}
+        .distance{margin-top: 50px;}
+        .student-content{margin-top: 50px;}
+        select{height: 34px;width: 160px;padding:6px 12px;font-size: 14px;border-radius: 4px;}
+        select:last-of-type{margin-left: 60px;}
+        select:first-of-type{margin-left: 20px;}
+        /*span:nth-of-type(3){margin-top: 4px;}*/
+        .outSchool{display: none;margin-top: 50px;}
+        .outSchool input{margin-left: 10px;border:2px solid #a8a8a8;font-size: 25px;border-radius: 5px;}
+    </style>
+</head>
+<body>
+<div class="distance">
+    <form class="form">
+        <div class="different">
+            <input type="radio" name="job" value="student" checked="checked"><span>在校生</span>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="job" value="worker"><span>非在校生</span>
+        </div>
+        <div class="student-content">
+            <span>学校</span>
+            <select id="select1">
+                <option value="beijing">北京</option>
+                <option value="haerbin">哈尔滨</option>
+                <option value="anhui">安徽</option>
+            </select>
+            <select id="select2">
+                <option value="pku">北京大学</option>
+                <option value="thu">清华大学</option>
+                <option value="bhu">中国地质大学</option>
+            </select>
+        </div>
+        <div class="outSchool">
+            <span>就业单位</span><input type="text" name="job">
+        </div>
+    </form>
+    <script>
+        (function(){
+            var inputs = document.getElementsByTagName("input");
+            var inSchool =document.getElementsByClassName("student-content")[0];
+            var outSchool =document.getElementsByClassName("outSchool")[0];
+            var source = document.getElementById("select1");
+            var target = document.getElementById("select2");
+
+            inputs[0].addEventListener("click", function(){
+                inSchool.style.display = "block";
+                outSchool.style.display = "none";
+            });
+            inputs[1].addEventListener("click", function(){
+                outSchool.style.display = "block";
+                inSchool.style.display = "none";
+            });
+            source.addEventListener("change", function(){
+                var selected = source.options[source.selectedIndex].value;
+                var data = {
+                    beijing: ["北京大学", "清华大学", "中国地质大学"],
+                    haerbin: ["哈工大", "哈工程", "黑科技"],
+                    anhui: ["中国科技大学", "安徽大学", "安徽财经大学"]
+                }
+                target.innerHTML = "";
+                for(var i=0; i<data[selected].length; i++){
+                    var opt = document.createElement("option");
+                        opt.value = data[selected][i];
+                        opt.innerHTML = data[selected][i];
+                        target.appendChild(opt);
+                }
+            })
+        })();
+    </script>
+</div>
+</body>
+</html>
